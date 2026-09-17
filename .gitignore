@@ -1,0 +1,13 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Uploaded profile images
+uploads/
+
+# Local database configuration
+src/main/resources/application.properties
+

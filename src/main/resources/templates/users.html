@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Users - CodeAlpha Social</title>
+
+
+    <!-- GOOGLE FONT -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: 'Poppins', Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #fff0f6,
+                            #eef4ff,
+                            #f4efff,
+                            #edfff7
+                    );
+
+            color: #222;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           ANIMATED BACKGROUND
+           ========================= */
+
+        .shape {
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            opacity: 0.35;
+
+            z-index: -1;
+
+            filter: blur(2px);
+
+            animation:
+                    floating 8s ease-in-out infinite;
+        }
+
+
+        .shape-one {
+
+            width: 230px;
+
+            height: 230px;
+
+            background: #ff70a6;
+
+            top: 120px;
+
+            left: -90px;
+        }
+
+
+        .shape-two {
+
+            width: 280px;
+
+            height: 280px;
+
+            background: #8064ff;
+
+            right: -120px;
+
+            top: 360px;
+
+            animation-delay: 2s;
+        }
+
+
+        .shape-three {
+
+            width: 170px;
+
+            height: 170px;
+
+            background: #48dcb5;
+
+            left: 15%;
+
+            bottom: -50px;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes floating {
+
+            0%, 100% {
+
+                transform:
+                        translateY(0)
+                        translateX(0);
+
+            }
+
+            50% {
+
+                transform:
+                        translateY(-30px)
+                        translateX(20px);
+
+            }
+
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        .navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            padding: 15px 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: white;
+
+            background:
+                    linear-gradient(
+                            90deg,
+                            #6c3cff,
+                            #9b4dff,
+                            #ff4f9a
+                    );
+
+            box-shadow:
+                    0 5px 20px
+                    rgba(90,50,150,0.25);
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: 700;
+        }
+
+
+        .logo span {
+
+            color: #ffe66d;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .nav-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+
+            background:
+                    rgba(255,255,255,0.2);
+
+            transform:
+                    translateY(-2px);
+        }
+
+
+        .nav-button {
+
+            background:
+                    rgba(255,255,255,0.95);
+
+            color: #5224c7 !important;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+           ========================= */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 850px;
+
+            margin: 40px auto 60px;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+           ========================= */
+
+        .page-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            animation:
+                    fadeDown 0.7s ease;
+        }
+
+
+        @keyframes fadeDown {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                        translateY(-25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                        translateY(0);
+
+            }
+
+        }
+
+
+        .page-header h1 {
+
+            margin: 0;
+
+            font-size: 34px;
+
+            color: #30205e;
+        }
+
+
+        .page-header p {
+
+            margin-top: 8px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+           ========================= */
+
+        .search-box {
+
+            background:
+                    rgba(255,255,255,0.92);
+
+            padding: 18px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                    0 8px 25px
+                    rgba(60,40,120,0.10);
+
+            margin-bottom: 25px;
+
+            animation:
+                    fadeUp 0.8s ease;
+        }
+
+
+        @keyframes fadeUp {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                        translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                        translateY(0);
+
+            }
+
+        }
+
+
+        .search-wrapper {
+
+            position: relative;
+        }
+
+
+        .search-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                    translateY(-50%);
+
+            font-size: 18px;
+        }
+
+
+        #searchInput {
+
+            width: 100%;
+
+            padding:
+                    13px 15px 13px 45px;
+
+            border:
+                    2px solid #eee;
+
+            border-radius: 13px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #fafaff;
+
+            transition: 0.3s;
+        }
+
+
+        #searchInput:focus {
+
+            border-color: #8b5cf6;
+
+            background: white;
+
+            box-shadow:
+                    0 0 0 4px
+                    rgba(139,92,246,0.10);
+        }
+
+
+        /* =========================
+           USER COUNT
+           ========================= */
+
+        .user-count {
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin:
+                    0 0 15px 5px;
+        }
+
+
+        /* =========================
+           USER CARD
+           ========================= */
+
+        .user-card {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding: 20px;
+
+            margin-bottom: 15px;
+
+            background:
+                    rgba(255,255,255,0.94);
+
+            border-radius: 20px;
+
+            box-shadow:
+                    0 8px 25px
+                    rgba(60,40,120,0.10);
+
+            border:
+                    1px solid rgba(255,255,255,0.9);
+
+            transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+
+            animation:
+                    cardAppear 0.6s ease both;
+        }
+
+
+        .user-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+
+        .user-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+
+        .user-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+
+        .user-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                        translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                        translateY(0);
+
+            }
+
+        }
+
+
+        .user-card:hover {
+
+            transform:
+                    translateY(-5px);
+
+            box-shadow:
+                    0 15px 35px
+                    rgba(70,50,130,0.16);
+        }
+
+
+        /* COLOR STRIPE */
+
+        .user-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 18px;
+
+            bottom: 18px;
+
+            width: 4px;
+
+            border-radius: 5px;
+
+            background:
+                    linear-gradient(
+                            180deg,
+                            #6c3cff,
+                            #ff4f9a
+                    );
+        }
+
+
+        /* =========================
+           USER IMAGE
+           ========================= */
+
+        .user-image {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border:
+                    3px solid #ff72ad;
+
+            flex-shrink: 0;
+
+            transition:
+                    transform 0.3s ease;
+        }
+
+
+        .user-card:hover .user-image {
+
+            transform:
+                    scale(1.08)
+                    rotate(2deg);
+        }
+
+
+        .default-user-image {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 30px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #ff4f9a
+                    );
+
+            transition:
+                    transform 0.3s ease;
+        }
+
+
+        .user-card:hover .default-user-image {
+
+            transform:
+                    scale(1.08)
+                    rotate(2deg);
+        }
+
+
+        /* =========================
+           USER INFORMATION
+           ========================= */
+
+        .user-info {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .user-name {
+
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: #30205e;
+        }
+
+
+        .user-name a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+
+        .user-name a:hover {
+
+            color: #8b45ff;
+        }
+
+
+        .user-email {
+
+            margin-top: 5px;
+
+            color: #888;
+
+            font-size: 13px;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .user-tag {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            padding: 4px 9px;
+
+            border-radius: 20px;
+
+            background:
+                    #f1ecff;
+
+            color: #7041d9;
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           PROFILE BUTTON
+           ========================= */
+
+        .profile-button {
+
+            display: inline-block;
+
+            padding:
+                    10px 17px;
+
+            border-radius: 11px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #ff4f9a
+                    );
+
+            box-shadow:
+                    0 5px 15px
+                    rgba(108,60,255,0.20);
+
+            transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+        }
+
+
+        .profile-button:hover {
+
+            transform:
+                    translateY(-3px);
+
+            box-shadow:
+                    0 9px 22px
+                    rgba(108,60,255,0.30);
+        }
+
+
+        /* =========================
+           NO RESULTS
+           ========================= */
+
+        .no-results {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 35px;
+
+            background:
+                    rgba(255,255,255,0.9);
+
+            border-radius: 18px;
+
+            color: #777;
+
+            box-shadow:
+                    0 8px 25px
+                    rgba(60,40,120,0.08);
+        }
+
+
+        .no-results-icon {
+
+            font-size: 40px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+           ========================= */
+
+        .back-button {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 30px auto 0;
+
+            padding:
+                    10px 20px;
+
+            background:
+                    rgba(255,255,255,0.9);
+
+            color: #4a3d68;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            box-shadow:
+                    0 5px 15px
+                    rgba(60,40,120,0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                    translateY(-3px);
+
+            background: white;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+
+                padding:
+                        13px 15px;
+
+            }
+
+
+            .logo {
+
+                font-size: 19px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 3px;
+
+            }
+
+
+            .nav-links a {
+
+                padding:
+                        6px 8px;
+
+                font-size: 11px;
+
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 25px;
+
+            }
+
+
+            .page-header h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .user-card {
+
+                padding:
+                        15px;
+
+                gap: 12px;
+
+            }
+
+
+            .user-image,
+            .default-user-image {
+
+                width: 58px;
+
+                height: 58px;
+
+            }
+
+
+            .default-user-image {
+
+                font-size: 24px;
+
+            }
+
+
+            .user-name {
+
+                font-size: 15px;
+
+            }
+
+
+            .user-email {
+
+                font-size: 11px;
+
+            }
+
+
+            .profile-button {
+
+                padding:
+                        8px 10px;
+
+                font-size: 11px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     BACKGROUND
+     ========================= -->
+
+<div class="shape shape-one"></div>
+
+<div class="shape shape-two"></div>
+
+<div class="shape shape-three"></div>
+
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+
+<div class="navbar">
+
+
+    <div class="logo">
+
+        ✦ CodeAlpha <span>Social</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+
+        <a href="/users"
+           class="nav-button">
+
+            👥 Users
+
+        </a>
+
+
+        <a href="/logout"
+           th:if="${loggedInUser != null}">
+
+            Logout
+
+        </a>
+
+
+        <a href="/login"
+           th:if="${loggedInUser == null}">
+
+            Login
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN
+     ========================= -->
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+
+        <h1>
+            👥 Discover People
+        </h1>
+
+        <p>
+            Connect with people and explore their profiles ✨
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <div class="search-wrapper">
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+            <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search users by name or email...">
+
+        </div>
+
+    </div>
+
+
+    <!-- USER COUNT -->
+
+    <div class="user-count">
+
+        Showing
+        <strong id="userCount"
+                th:text="${#lists.size(users)}">
+            0
+        </strong>
+
+        users
+
+    </div>
+
+
+    <!-- =========================
+         USER LIST
+         ========================= -->
+
+    <div id="userList">
+
+
+        <div class="user-card"
+             th:each="user : ${users}">
+
+
+            <!-- PROFILE IMAGE -->
+
+            <img th:if="${user.profileImage != null and !user.profileImage.isEmpty()}"
+                 th:src="@{/profile/image/{fileName}(fileName=${user.profileImage})}"
+                 class="user-image"
+                 alt="Profile Image">
+
+
+            <!-- DEFAULT IMAGE -->
+
+            <div th:if="${user.profileImage == null or user.profileImage.isEmpty()}"
+                 class="default-user-image">
+
+                👤
+
+            </div>
+
+
+            <!-- USER INFO -->
+
+            <div class="user-info">
+
+
+                <h3 class="user-name">
+
+                    <a th:href="@{/profile(id=${user.id})}"
+                       th:text="${user.name}">
+
+                        User
+
+                    </a>
+
+                </h3>
+
+
+                <div class="user-email"
+                     th:text="${user.email}">
+
+                    user@email.com
+
+                </div>
+
+
+                <span class="user-tag">
+
+                    ✨ CodeAlpha Member
+
+                </span>
+
+            </div>
+
+
+            <!-- VIEW PROFILE -->
+
+            <a th:href="@{/profile(id=${user.id})}"
+               class="profile-button">
+
+                View Profile →
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- NO SEARCH RESULTS -->
+
+    <div class="no-results"
+         id="noResults">
+
+        <div class="no-results-icon">
+            🔍
+        </div>
+
+        <strong>
+            No users found
+        </strong>
+
+        <div>
+            Try searching with a different name or email.
+        </div>
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <a href="/"
+       class="back-button">
+
+        ← Back to Home
+
+    </a>
+
+</div>
+
+
+<!-- =========================
+     SEARCH JAVASCRIPT
+     ========================= -->
+
+<script>
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const userCards =
+        document.querySelectorAll(".user-card");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    const userCount =
+        document.getElementById("userCount");
+
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const searchValue =
+                this.value.toLowerCase().trim();
+
+            let visibleUsers = 0;
+
+
+            userCards.forEach(
+                function (card) {
+
+                    const name =
+                        card.querySelector(
+                            ".user-name"
+                        ).textContent.toLowerCase();
+
+
+                    const email =
+                        card.querySelector(
+                            ".user-email"
+                        ).textContent.toLowerCase();
+
+
+                    if (
+                        name.includes(searchValue)
+                        ||
+                        email.includes(searchValue)
+                    ) {
+
+                        card.style.display = "flex";
+
+                        visibleUsers++;
+
+                    } else {
+
+                        card.style.display = "none";
+
+                    }
+
+                }
+            );
+
+
+            userCount.textContent =
+                visibleUsers;
+
+
+            if (visibleUsers === 0) {
+
+                noResults.style.display =
+                    "block";
+
+            } else {
+
+                noResults.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

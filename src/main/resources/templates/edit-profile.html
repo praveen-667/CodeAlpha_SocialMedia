@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile - CodeAlpha Social Media</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 550px;
+            margin: 40px auto;
+        }
+
+        .edit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #222;
+        }
+
+        .image-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .current-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #222;
+        }
+
+        .default-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #222;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+        }
+
+        .image-input {
+            border: none;
+            padding: 5px;
+        }
+
+        .save-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #444;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #d00000;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #222;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2>CodeAlpha Social</h2>
+
+    <div>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- EDIT PROFILE -->
+
+<div class="container">
+
+    <div class="edit-card">
+
+        <h1>Edit Profile</h1>
+
+
+        <!-- ERROR -->
+
+        <div class="error"
+             th:if="${error != null}"
+             th:text="${error}">
+
+            Error
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form action="/profile/edit"
+              method="post"
+              enctype="multipart/form-data">
+
+
+            <!-- PROFILE IMAGE -->
+
+            <div class="image-section">
+
+                <div th:if="${user.profileImage == null or user.profileImage.isEmpty()}"
+                     class="default-image">
+
+                    👤
+
+                </div>
+
+                <img th:if="${user.profileImage != null and !user.profileImage.isEmpty()}"
+                     th:src="@{/profile/image/{fileName}(fileName=${user.profileImage})}"
+                     class="current-image"
+                     alt="Profile Image">
+
+                <label for="profileImage">
+                    Profile Picture
+                </label>
+
+                <input type="file"
+                       id="profileImage"
+                       name="profileImage"
+                       class="image-input"
+                       accept="image/*">
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <label for="name">
+                Name
+            </label>
+
+            <input type="text"
+                   id="name"
+                   name="name"
+                   th:value="${user.name}"
+                   placeholder="Enter your name"
+                   required>
+
+
+            <!-- EMAIL -->
+
+            <label for="email">
+                Email
+            </label>
+
+            <input type="email"
+                   id="email"
+                   th:value="${user.email}"
+                   readonly>
+
+
+            <!-- BIO -->
+
+            <label for="bio">
+                Bio
+            </label>
+
+            <textarea
+                    id="bio"
+                    name="bio"
+                    placeholder="Tell people something about yourself..."
+                    th:text="${user.bio}">
+            </textarea>
+
+
+            <!-- SAVE -->
+
+            <button type="submit"
+                    class="save-button">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
+
+        <!-- BACK -->
+
+        <a href="/"
+           class="back-link">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - CodeAlpha Social</title>
+
+
+    <!-- GOOGLE FONT -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: 'Poppins', Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #fff0f6,
+                            #eef4ff,
+                            #f4efff,
+                            #edfff7
+                    );
+
+            color: #222;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           BACKGROUND SHAPES
+           ========================= */
+
+        .shape {
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            z-index: -1;
+
+            opacity: 0.35;
+
+            filter: blur(2px);
+
+            animation: floating 8s ease-in-out infinite;
+        }
+
+
+        .shape-one {
+
+            width: 230px;
+            height: 230px;
+
+            background: #ff70a6;
+
+            top: 130px;
+            left: -100px;
+        }
+
+
+        .shape-two {
+
+            width: 280px;
+            height: 280px;
+
+            background: #8064ff;
+
+            right: -120px;
+            top: 350px;
+
+            animation-delay: 2s;
+        }
+
+
+        .shape-three {
+
+            width: 170px;
+            height: 170px;
+
+            background: #48dcb5;
+
+            left: 15%;
+            bottom: -50px;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes floating {
+
+            0%, 100% {
+
+                transform:
+                        translateY(0)
+                        translateX(0);
+
+            }
+
+            50% {
+
+                transform:
+                        translateY(-30px)
+                        translateX(20px);
+
+            }
+
+        }
+
+
+        /* =========================
+           NAVBAR
+           ========================= */
+
+        .navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            padding: 15px 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: white;
+
+            background:
+                    linear-gradient(
+                            90deg,
+                            #6c3cff,
+                            #9b4dff,
+                            #ff4f9a
+                    );
+
+            box-shadow:
+                    0 5px 20px
+                    rgba(90,50,150,0.25);
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: 700;
+        }
+
+
+        .logo span {
+
+            color: #ffe66d;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .nav-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+
+            background:
+                    rgba(255,255,255,0.2);
+
+            transform:
+                    translateY(-2px);
+        }
+
+
+        /* =========================
+           MAIN
+           ========================= */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 720px;
+
+            margin: 40px auto 60px;
+        }
+
+
+        /* =========================
+           PROFILE CARD
+           ========================= */
+
+        .profile-card {
+
+            background:
+                    rgba(255,255,255,0.94);
+
+            backdrop-filter: blur(12px);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                    0 15px 40px
+                    rgba(60,40,120,0.15);
+
+            animation:
+                    profileAppear 0.7s ease;
+        }
+
+
+        @keyframes profileAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                        translateY(30px)
+                        scale(0.98);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                        translateY(0)
+                        scale(1);
+
+            }
+
+        }
+
+
+        /* =========================
+           COVER
+           ========================= */
+
+        .cover {
+
+            height: 190px;
+
+            position: relative;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #9b4dff,
+                            #ff4f9a,
+                            #ff77b7
+                    );
+
+            overflow: hidden;
+        }
+
+
+        .cover::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+                    rgba(255,255,255,0.14);
+
+            top: -100px;
+
+            left: -50px;
+
+            animation:
+                    coverFloat 6s ease-in-out infinite;
+        }
+
+
+        .cover::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            border-radius: 50%;
+
+            background:
+                    rgba(255,255,255,0.12);
+
+            right: -80px;
+
+            bottom: -160px;
+
+            animation:
+                    coverFloat 7s ease-in-out infinite reverse;
+        }
+
+
+        @keyframes coverFloat {
+
+            0%, 100% {
+
+                transform:
+                        translateY(0)
+                        rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                        translateY(-15px)
+                        rotate(8deg);
+
+            }
+
+        }
+
+
+        .cover-text {
+
+            position: absolute;
+
+            left: 30px;
+
+            bottom: 25px;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            letter-spacing: 1px;
+
+            z-index: 2;
+        }
+
+
+        /* =========================
+           PROFILE CONTENT
+           ========================= */
+
+        .profile-content {
+
+            padding: 0 35px 35px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           PROFILE IMAGE
+           ========================= */
+
+        .image-wrapper {
+
+            position: relative;
+
+            width: 150px;
+
+            height: 150px;
+
+            margin:
+                    -75px auto 18px;
+
+            z-index: 5;
+
+            animation:
+                    imageAppear 0.8s ease;
+        }
+
+
+        @keyframes imageAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                        scale(0.5)
+                        rotate(-10deg);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                        scale(1)
+                        rotate(0);
+
+            }
+
+        }
+
+
+        .profile-image {
+
+            width: 150px;
+
+            height: 150px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border:
+                    6px solid white;
+
+            box-shadow:
+                    0 8px 25px
+                    rgba(60,40,100,0.25);
+
+            transition:
+                    transform 0.4s ease,
+                    box-shadow 0.4s ease;
+        }
+
+
+        .profile-image:hover {
+
+            transform:
+                    scale(1.07)
+                    rotate(2deg);
+
+            box-shadow:
+                    0 12px 30px
+                    rgba(108,60,255,0.35);
+        }
+
+
+        .default-image {
+
+            width: 150px;
+
+            height: 150px;
+
+            border-radius: 50%;
+
+            border:
+                    6px solid white;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #ff4f9a
+                    );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 55px;
+
+            box-shadow:
+                    0 8px 25px
+                    rgba(60,40,100,0.25);
+        }
+
+
+        /* =========================
+           NAME
+           ========================= */
+
+        .profile-name {
+
+            font-size: 29px;
+
+            font-weight: 700;
+
+            color: #30205e;
+
+            margin-top: 5px;
+        }
+
+
+        .profile-email {
+
+            color: #888;
+
+            font-size: 14px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           BIO
+           ========================= */
+
+        .bio {
+
+            max-width: 560px;
+
+            margin: 20px auto;
+
+            padding: 15px 20px;
+
+            border-radius: 15px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #faf7ff,
+                            #fff6fb
+                    );
+
+            color: #555;
+
+            line-height: 1.6;
+
+            border:
+                    1px solid #eee;
+
+            animation:
+                    fadeIn 1s ease;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================
+           STATS
+           ========================= */
+
+        .stats {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 0;
+
+            max-width: 420px;
+
+            margin: 25px auto;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #f7f3ff,
+                            #fff2f8
+                    );
+
+            border:
+                    1px solid #eee;
+        }
+
+
+        .stat {
+
+            flex: 1;
+
+            padding: 18px 10px;
+
+            transition:
+                    background 0.3s,
+                    transform 0.3s;
+        }
+
+
+        .stat:hover {
+
+            background: white;
+
+            transform:
+                    translateY(-3px);
+        }
+
+
+        .stat + .stat {
+
+            border-left:
+                    1px solid #e7e0f5;
+        }
+
+
+        .stat-number {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #6c3cff;
+        }
+
+
+        .stat-label {
+
+            color: #888;
+
+            font-size: 13px;
+
+            margin-top: 3px;
+        }
+
+
+        /* =========================
+           FOLLOW BUTTON
+           ========================= */
+
+        .follow-button {
+
+            padding: 12px 32px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #ff4f9a
+                    );
+
+            box-shadow:
+                    0 7px 18px
+                    rgba(108,60,255,0.25);
+
+            transition:
+                    transform 0.3s,
+                    box-shadow 0.3s;
+        }
+
+
+        .follow-button:hover {
+
+            transform:
+                    translateY(-3px)
+                    scale(1.03);
+
+            box-shadow:
+                    0 10px 25px
+                    rgba(108,60,255,0.35);
+        }
+
+
+        .follow-button:active {
+
+            transform:
+                    scale(0.95);
+        }
+
+
+        /* =========================
+           OWN PROFILE
+           ========================= */
+
+        .your-profile {
+
+            margin: 18px 0;
+
+            color: #6c3cff;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           EDIT BUTTON
+           ========================= */
+
+        .edit-button {
+
+            display: inline-block;
+
+            padding: 11px 28px;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-weight: 600;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6c3cff,
+                            #9b4dff
+                    );
+
+            box-shadow:
+                    0 6px 18px
+                    rgba(108,60,255,0.2);
+
+            transition: 0.3s;
+        }
+
+
+        .edit-button:hover {
+
+            transform:
+                    translateY(-3px);
+
+            box-shadow:
+                    0 10px 22px
+                    rgba(108,60,255,0.3);
+        }
+
+
+        /* =========================
+           BACK BUTTON
+           ========================= */
+
+        .back-button {
+
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 10px 20px;
+
+            background: #f1eff7;
+
+            color: #4a3d68;
+
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            transition: 0.3s;
+        }
+
+
+        .back-button:hover {
+
+            background: #e5def8;
+
+            transform:
+                    translateY(-2px);
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding:
+                        13px 15px;
+
+            }
+
+
+            .logo {
+
+                font-size: 19px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 3px;
+
+            }
+
+
+            .nav-links a {
+
+                padding:
+                        6px 8px;
+
+                font-size: 11px;
+
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 25px;
+
+            }
+
+
+            .cover {
+
+                height: 150px;
+
+            }
+
+
+            .image-wrapper {
+
+                width: 125px;
+
+                height: 125px;
+
+                margin-top: -62px;
+
+            }
+
+
+            .profile-image,
+            .default-image {
+
+                width: 125px;
+
+                height: 125px;
+
+            }
+
+
+            .profile-name {
+
+                font-size: 24px;
+
+            }
+
+
+            .profile-content {
+
+                padding:
+                        0 18px 25px;
+
+            }
+
+
+            .stats {
+
+                max-width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ANIMATED BACKGROUND -->
+
+<div class="shape shape-one"></div>
+
+<div class="shape shape-two"></div>
+
+<div class="shape shape-three"></div>
+
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+
+<div class="navbar">
+
+
+    <div class="logo">
+
+        ✦ CodeAlpha <span>Social</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+
+        <a href="/users">
+            👥 Users
+        </a>
+
+
+        <a href="/logout"
+           th:if="${loggedInUser != null}">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PROFILE
+     ========================= -->
+
+<div class="container">
+
+
+    <div class="profile-card">
+
+
+        <!-- COVER -->
+
+        <div class="cover">
+
+            <div class="cover-text">
+
+                ✨ Welcome to my profile
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-content">
+
+
+            <!-- PROFILE IMAGE -->
+
+            <div class="image-wrapper">
+
+
+                <!-- ACTUAL IMAGE -->
+
+                <img th:if="${profileUser.profileImage != null and !profileUser.profileImage.isEmpty()}"
+                     th:src="@{/profile/image/{fileName}(fileName=${profileUser.profileImage})}"
+                     class="profile-image"
+                     alt="Profile Image">
+
+
+                <!-- DEFAULT IMAGE -->
+
+                <div th:if="${profileUser.profileImage == null or profileUser.profileImage.isEmpty()}"
+                     class="default-image">
+
+                    👤
+
+                </div>
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="profile-name"
+                 th:text="${profileUser.name}">
+
+                User
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="profile-email"
+                 th:text="${profileUser.email}">
+
+                user@email.com
+
+            </div>
+
+
+            <!-- BIO -->
+
+            <div class="bio"
+                 th:if="${profileUser.bio != null and !profileUser.bio.isEmpty()}"
+                 th:text="${profileUser.bio}">
+
+                User bio
+
+            </div>
+
+
+            <div class="bio"
+                 th:if="${profileUser.bio == null or profileUser.bio.isEmpty()}">
+
+                No bio available.
+
+            </div>
+
+
+            <!-- =========================
+                 FOLLOW STATS
+                 ========================= -->
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <div class="stat-number"
+                         th:text="${followerCount}">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-label">
+
+                        Followers 👥
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number"
+                         th:text="${followingCount}">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-label">
+
+                        Following ✨
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 FOLLOW BUTTON
+                 ========================= -->
+
+            <div th:if="${loggedInUser != null and loggedInUser.id != profileUser.id}">
+
+
+                <form action="/follow/toggle"
+                      method="post">
+
+
+                    <input type="hidden"
+                           name="userId"
+                           th:value="${profileUser.id}">
+
+
+                    <button type="submit"
+                            class="follow-button">
+
+
+                        <span th:if="${following}">
+                            💜 Unfollow
+                        </span>
+
+
+                        <span th:unless="${following}">
+                            💜 Follow
+                        </span>
+
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- =========================
+                 OWN PROFILE
+                 ========================= -->
+
+            <div th:if="${loggedInUser != null and loggedInUser.id == profileUser.id}">
+
+
+                <div class="your-profile">
+
+                    ✨ This is your profile
+
+                </div>
+
+
+                <a href="/profile/edit"
+                   class="edit-button">
+
+                    ✏️ Edit Profile
+
+                </a>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div>
+
+                <a href="/"
+                   class="back-button">
+
+                    ← Back to Home
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
